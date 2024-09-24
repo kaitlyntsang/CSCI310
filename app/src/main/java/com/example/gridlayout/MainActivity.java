@@ -12,51 +12,27 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-
-
-
-import org.w3c.dom.Text;
-
-
-
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
-
-
-
-
-
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView btnTest;
-    public TextView time;
     private boolean isPick = true;
-
-
     private static final int COLUMN_COUNT = 10;
-
-
-
     private ArrayList<TextView> cell_tvs;
-
-
 
 
     private int dpToPixel(int dp) {
         float density = Resources.getSystem().getDisplayMetrics().density;
         return Math.round(dp * density);
     }
-
 
     int flagCount;
     Button playAgain;
@@ -67,16 +43,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> visited;
     boolean gameOver = false;
 
-
-
-
-
-
-
-
     List<Integer> bombPos = new ArrayList<Integer>();
-
-
 
 
     @Override
@@ -107,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         cell_tvs = new ArrayList<TextView>();
 
@@ -140,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private void setBombs()
     {
         for(int i =0; i < 4; i++)
@@ -151,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private int findIndexOfCellTextView(TextView tv) {
         for (int n=0; n<cell_tvs.size(); n++) {
             if (cell_tvs.get(n) == tv)
@@ -159,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return -1;
     }
-
-
 
 
     public void onClickTV(View view){
@@ -186,8 +147,6 @@ public class MainActivity extends AppCompatActivity {
                 showResult(0, timer);
             }
         }
-
-
 
         if(visited == null)
         {
@@ -354,8 +313,6 @@ public class MainActivity extends AppCompatActivity {
     {
         int[] rowsAround = {-1, -1, -1, 0, 0, 1, 1, 1};
         int[] colsAround = {-1, 0, 1, -1, 1, -1, 0, 1};
-
-
         int currCell = row * 10 + col;
 
         if(visited.contains(currCell))
@@ -380,27 +337,17 @@ public class MainActivity extends AppCompatActivity {
             cell.setBackgroundColor(Color.LTGRAY);
             return;
 
-
-
-
         }
-
-
-
 
         for (int i = 0; i < 8; i++) {
             int currRow = row + rowsAround[i];
             int currCol = col + colsAround[i];
-
-
-
 
             if(currRow >= 0 && currRow < 12 && currCol >= 0 && currCol < 10)
             {
                 revealCells(currRow, currCol, visited);
             }
         }
-
 
     }
 
