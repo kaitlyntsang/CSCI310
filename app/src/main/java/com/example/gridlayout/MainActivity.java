@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickTV(View view){
-        TextView result = findViewById(R.id.result);
         TextView tv = (TextView) view;
         int bombCount = 0;
         int n = findIndexOfCellTextView(tv);
@@ -276,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
         if(foundBombs == 4 || visited.size() == 116)
         {
             gameOver = true;
-            result.setText(String.valueOf("complete"));
             revealMines();
         }
 
