@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,19 +38,12 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
     private TextView btnTest;
     public TextView time;
     private boolean isPick = true;
 
 
-
-
     private static final int COLUMN_COUNT = 10;
-    //private static final int ROW_COUNT = 12;
-
 
 
 
@@ -68,10 +62,7 @@ public class MainActivity extends AppCompatActivity {
     Button playAgain;
     TextView flagVal;
     TextView clock;
-    TextView win;
-    long startTime;
-    long endTime;
-    long elapsedTime;
+    int timer =0;
     int foundBombs = 0;
     ArrayList<Integer> visited;
     boolean gameOver = false;
@@ -98,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         clock = findViewById(R.id.clockVal);
         playAgain = findViewById(R.id.playAgain);
 
+        runTimer();
 
         //change pick/ flag icon
         TextView timeVal = findViewById(R.id.clockVal);
@@ -188,11 +180,11 @@ public class MainActivity extends AppCompatActivity {
         {
             if(foundBombs == 4 || visited.size() == 116)
             {
-                showResult(1);
+                showResult(1, timer);
             }
             else
             {
-                showResult(0);
+                showResult(0, timer);
             }
         }
 
@@ -202,13 +194,6 @@ public class MainActivity extends AppCompatActivity {
         {
             visited = new ArrayList<>();
         }
-//        if(!visited.contains(n))
-//        {
-//            visited.add(n);
-//            String visSize = String.valueOf(visited.size());
-//            Log.v("3", visSize);
-//        }
-
 
         if(!isPick)
         {
@@ -297,6 +282,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void runTimer() {
+        clock = (TextView) findViewById(R.id.clockVal);
+        final Handler handler = new Handler();
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                int seconds = timer%60;
+
+                String time = String.valueOf(seconds);
+                clock.setText(time);
+
+                if (gameOver == false) {
+                    timer++;
+                }
+                handler.postDelayed(this, 1000);
+            }
+        });
+    }
+
     private void revealMines()
     {
         for(int i =0; i < 4; i++)
@@ -310,9 +316,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    private void showResult(int result)
+    private void showResult(int result, int endTime)
     {
         Intent intent = new Intent(this, resultPage.class);
+        intent.putExtra("time", endTime);
         if(result == 1) //win
         {
             intent.putExtra("WIN", 1);

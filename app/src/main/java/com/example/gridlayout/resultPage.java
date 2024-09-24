@@ -25,6 +25,8 @@ public class resultPage extends AppCompatActivity
 
         Intent intent = getIntent();
 
+        String time = String.valueOf(intent.getIntExtra("time", 0));
+
         if(intent.hasExtra("WIN"))
         {
             mess.setText("Used " + time + " seconds.\nYou won.\nGood job!");
