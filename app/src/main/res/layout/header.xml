@@ -32,6 +32,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
+        android:layout_marginEnd="50dp"
         android:textSize="32sp"
        />
 
@@ -59,9 +60,25 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="20dp"
+        android:layout_marginStart="50dp"
         android:textAlignment="center"
         android:textSize="32sp"
       />
 
+
+    <TextView
+        android:id="@+id/pickImg"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pick"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="50dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
