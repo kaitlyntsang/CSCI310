@@ -1,8 +1,5 @@
 package com.example.gridlayout;
 
-
-
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
 
@@ -39,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     TextView flagVal;
     TextView clock;
     int timer =0;
-    int foundBombs = 0;
     ArrayList<Integer> visited;
     boolean gameOver = false;
 
@@ -138,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(gameOver)
         {
-            if(foundBombs == 4 || visited.size() == 116)
+            if(visited.size() == 116)
             {
                 showResult(1, timer);
             }
@@ -155,39 +151,23 @@ public class MainActivity extends AppCompatActivity {
 
         if(!isPick)
         {
-            if(flagCount > 0)
+
+            if(tv.getText().equals(getString(R.string.flag)))
             {
-
-                if(tv.getText().equals(getString(R.string.flag)))
-                {
-                    tv.setText("");
-                    flagCount++;
-                }
-                else
-                {
-                    tv.setText(R.string.flag);
-                    tv.setTextSize(15);
-                    flagCount--;
-                }
-                tv.setBackgroundColor(Color.GREEN);
-                tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
-
-
-                flagVal.setText(String.valueOf(flagCount));
+                tv.setText("");
+                flagCount++;
             }
-            else if (flagCount == 0)
+            else
             {
-                if(tv.getText().equals(getString(R.string.flag)))
-                {
-                    tv.setText("");
-                    flagCount++;
-                }
+                tv.setText(R.string.flag);
+                tv.setTextSize(15);
+                flagCount--;
             }
+            tv.setBackgroundColor(Color.GREEN);
+            tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
 
-            if(bombPos.contains(n))
-            {
-                foundBombs++;
-            }
+
+            flagVal.setText(String.valueOf(flagCount));
 
         }
         else
@@ -231,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if(foundBombs == 4 || visited.size() == 116)
+        if(visited.size() == 116)
         {
             gameOver = true;
             revealMines();
